@@ -14,11 +14,11 @@ Updating Kernel using Package Manager:
 
 First check the version of kernel you’re currently using with the following command:
 ```bash
-$ uname -r
+uname -r
 ```
 Now run the following command to perform a system update with pacman:
 ```bash
-$ sudo pacman -S cpio bc rsync
+sudo pacman -S cpio bc rsync
 ```
 Compiling Kernel from Source:
 
@@ -26,7 +26,7 @@ You can also download and compile an updated version of kernel from the official
 
 The latest version of Linux kernel as of the time of writing is `6.9.0-rc2`. Find latest kernel copy link use `wget` command.
 ```bash
-$ wget https://git.kernel.org/torvalds/t/linux-6.9-rc2.tar.gz
+wget https://git.kernel.org/torvalds/t/linux-6.9-rc2.tar.gz
 ```
 The Linux kernel archive file should start downloading.
 
@@ -36,7 +36,7 @@ I listed the directory contents with ls command and as you can see, `linux-6.9-r
 
 Now extract the archive file with the following command:
 ```bash
-$ tar xvf linux-6.9-rc2.tar.gz
+tar xvf linux-6.9-rc2.tar.gz
 ```
 The file should be extracted.
 
@@ -46,15 +46,15 @@ Once the file is extracted, a new directory should be created. In my case it is 
 
 Now navigate to the directory with the following command:
 ```bash
-$ cd linux-6.9-rc2
+cd linux-6.9-rc2
 ```
 Now copy the configuration file that the current kernel is using to the `linux-6.9-rc2` directory with the following command:
 ```bash
-$ zcat /proc/config.gz > .config
+zcat /proc/config.gz > .config
 ```
 Now run the following command to prepare the configuration file for the new version of kernel.
 ```bash
-$ make menuconfig
+make menuconfig
 ```
 It should start the following terminal based graphical interface. You can press arrow keys to navigate and `Enter` and `ESC` to select or go back one step respectively.
 
@@ -68,7 +68,7 @@ You should be back to the terminal.
 
 Now run the following command to start the compilation process:
 ```bash
-$ make -j6
+make -j6
 ```
 The kernel compilation process should start.
 
@@ -76,55 +76,55 @@ It should take a long time for the kernel compilation process to finish.
 
 Now install all the compiled kernel headers with the following command:
 ```bash
-$ sudo make header_install
+sudo make header_install
 ```
 All the kernel headers should be installed.
 
 Now install all the compiled kernel modules with the following command:
 ```bash
-$ sudo make modules_install
+sudo make modules_install
 ```
 All the kernel modules should be installed.
 
 Now install all the compiled nvidia-dkms with the following command:
 ```bash
-$ yay -S nvidia_dkms
+yay -S nvidia_dkms
 ```
 Nvidia-dkms should be installed.
 
 Now copy the vmlinuz file for your architecture to the /boot directory. For 32-bit operating system, run the following command:
 ```bash
-$ sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
 ```
 For 64-bit operating system, run the following command:
 ```bash
-$ sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-6.9.0-rc2
+sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-6.9.0-rc2
 ```
 The file should be copied.
 
 Now generate an initramfs image and save it to /boot directory with the following command:
 ```bash
-$ sudo mkinitcpio -k 6.9.0-rc2 -g /boot/initramfs-6.9.0-rc2.img
+sudo mkinitcpio -k 6.9.0-rc2 -g /boot/initramfs-6.9.0-rc2.img
 ```
 The initramfs file should be generated.
 
 Now copy the System.map file to /boot directory with the following command:
 ```bash
-$ sudo cp -v System.map /boot/System.map-6.9.0-rc2
+sudo cp -v System.map /boot/System.map-6.9.0-rc2
 ```
 Now make a symbolic link of the System.map-6.9.0-rc2 file to /boot/System.map with the following command:
 ```bash
-$ sudo ln -sf /boot/System.map-6.9.0-rc2 /boot/System.map
+sudo ln -sf /boot/System.map-6.9.0-rc2 /boot/System.map
 ```
 Now generate a grub.cfg file with the following command:
 ```bash
-$ sudo grub-mkconfig -o /boot/grub/grub.cfg
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 A new grub.cfg file should be generated.
 
 Now reboot your computer with the following command:
 ```bash
-$ sudo reboot
+sudo reboot
 ```
 When your computer shows the `GRUB` menu, select the `“Advanced options for Arch Linux”` option and press `Enter`.
 
@@ -132,7 +132,7 @@ Then select the menu for your newly installed kernel from the list and press `En
 
 Once your computer boot, run the following command to check for the kernel version:
 ```bash
-$ uname -r
+uname -r
 ```
 The kernel should be updated as you can see from the screenshot below.
 

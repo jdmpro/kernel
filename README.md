@@ -88,7 +88,7 @@ All the kernel modules should be installed.
 
 Now install all the compiled nvidia-dkms with the following command:
 ```bash
-yay -S nvidia_dkms
+yay -S nvidia-dkms
 ```
 Nvidia-dkms should be installed.
 

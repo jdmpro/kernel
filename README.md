@@ -92,6 +92,12 @@ $ sudo make modules_install
 ```
 All the kernel modules should be installed.
 
+Now install all the compiled nvidia-dkms with the following command:
+```bash
+$ yay -S nvidia_dkms
+```
+Nvidia-dkms should be installed.
+
 Now copy the vmlinuz file for your architecture to the /boot directory. For 32-bit operating system, run the following command:
 ```bash
 $ sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2

@@ -76,7 +76,7 @@ It should take a long time for the kernel compilation process to finish.
 
 Now install all the compiled kernel headers with the following command:
 ```bash
-sudo make header_install
+sudo make headers_install
 ```
 All the kernel headers should be installed.
 

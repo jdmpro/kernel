@@ -62,7 +62,7 @@ From here you can enable or disable specific kernel features. If you don’t kno
 
 Once you’re satisfied with the configuration file, go to `Save` option
 
-Go to `Exit`
+Go to `File` Go to `Exit`
 
 You should be back to the terminal.
 

@@ -26,7 +26,7 @@ You can also download and compile an updated version of kernel from the official
 
 The latest version of Linux kernel as of the time of writing is `linux-zen`. Find latest kernel copy link use `wget` command.
 ```bash
-wget https://git.kernel.org/torvalds/t/linux-zen.tar.gz
+wget [https://git.kernel.org/torvalds/t/linux-zen.tar.gz](https://github.com/zen-kernel/zen-kernel/archive/refs/tags/v6.8.4-zen1.tar.gz)
 ```
 The Linux kernel archive file should start downloading.
 

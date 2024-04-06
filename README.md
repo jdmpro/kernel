@@ -26,27 +26,27 @@ You can also download and compile an updated version of kernel from the official
 
 The latest version of Linux kernel as of the time of writing is `6.9.0-rc2`. Find latest kernel copy link use `wget` command.
 ```bash
-wget https://git.kernel.org/torvalds/t/linux-6.9-rc2.tar.gz
+wget https://git.kernel.org/torvalds/t/linux-zen.tar.gz
 ```
 The Linux kernel archive file should start downloading.
 
 Once the download is complete, navigate to the directory where you downloaded the file. In my case it is the Downloads/ directory in my USER’s home directory.
 
-I listed the directory contents with ls command and as you can see, `linux-6.9-rc2.tar.gz` file is there.
+I listed the directory contents with ls command and as you can see, `linux-zen.tar.gz` file is there.
 
 Now extract the archive file with the following command:
 ```bash
-tar xvf linux-6.9-rc2.tar.gz
+tar xvf linux-zen.tar.gz
 ```
 The file should be extracted.
 
 NOTE: To compile a Linux kernel, you need more than `20GB` of free space. You can check how much space you have left with `df -h` command.
 
-Once the file is extracted, a new directory should be created. In my case it is `linux-6.9-rc2/` directory.
+Once the file is extracted, a new directory should be created. In my case it is `linux-zen` directory.
 
 Now navigate to the directory with the following command:
 ```bash
-cd linux-6.9-rc2
+cd linux-zen
 ```
 Now copy the configuration file that the current kernel is using to the `linux-6.9-rc2` directory with the following command:
 ```bash
@@ -76,30 +76,30 @@ It should take a long time for the kernel compilation process to finish.
 
 Now install all the compiled kernel headers with the following command:
 ```bash
-sudo make headers
+sudo make -j24 headers
 ```
 ```bash
-sudo make headers_install
+sudo make -j24 headers_install
 ```
 All the kernel headers should be installed.
 
 Now install all the compiled kernel modules with the following command:
 ```bash
-sudo make modules
+sudo make -j24 modules
 ```
 ```bash
-sudo make modules_install
+sudo make -j24 modules_install
 ```
 All the kernel modules should be installed.
 
 Now copy the vmlinuz file for your architecture to the /boot directory. For 32-bit operating system, run the following command:
 For 32-bit operating system, run the following command:
 ```bash
-sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-zen
 ```
 For 64-bit operating system, run the following command:
 ```bash
-sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
+sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-linux-zen
 ```
 The file should be copied.
 
@@ -109,11 +109,37 @@ yay -S nvidia-dkms
 ```
 Nvidia-dkms should be installed.
 
+Auto Preset Method:
+First, copy the existing preset file, renaming it to match the name of the custom kernel specified as a suffix to /boot/vmlinuz- when copying the bzImage:
+```bash
+cp /etc/mkinitcpio.d/linux.preset /etc/mkinitcpio.d/linux-zen.preset
+```
+Second, edit the file and amend for the custom kernel. Note (again) that the ALL_kver= parameter also matches the name of the custom kernel specified when copying the bzImage:
+```bash
+sudo nano /etc/mkinitcpio.d/linux-zen.preset
+```
+```bash
+...
+ALL_kver="/boot/vmlinuz-linux-zen"
+...
+default_image="/boot/initramfs-linux-zen.img"
+...
+fallback_image="/boot/initramfs-linux-zen-fallback.img"
+```
+Finally, generate the initramfs images for the custom kernel in the same way as for an official kernel:
+```bash
+# mkinitcpio -p linux-zen
+```
+Manual Method:
 Now generate an initramfs image and save it to /boot directory with the following command:
 ```bash
-sudo mkinitcpio -k 6.9.0-rc2 -g /boot/initramfs-6.9.0-rc2.img
+sudo mkinitcpio -k <your_kernel> -g /boot/initramfs-linux-zen.img
 ```
 The initramfs file should be generated.
+
+If your `/boot` is on a filesystem which supports symlinks (i.e. not FAT32), copy `System.map` to `/boot`, appending your kernel's name to the destination file.
+
+Then create a symlink from `/boot/System.map` to point to `/boot/System.map-linux-zen`:
 
 Now copy the System.map file to /boot directory with the following command:
 ```bash

@@ -68,7 +68,7 @@ You should be back to the terminal.
 
 Now run the following command to start the compilation process:
 ```bash
-make -j24
+sudo make -j24
 ```
 The kernel compilation process should start.
 
@@ -112,7 +112,7 @@ Nvidia-dkms should be installed.
 Auto Preset Method:
 First, copy the existing preset file, renaming it to match the name of the custom kernel specified as a suffix to /boot/vmlinuz- when copying the bzImage:
 ```bash
-cp /etc/mkinitcpio.d/linux.preset /etc/mkinitcpio.d/linux-zen.preset
+sudo cp /etc/mkinitcpio.d/linux.preset /etc/mkinitcpio.d/linux-zen.preset
 ```
 Second, edit the file and amend for the custom kernel. Note (again) that the ALL_kver= parameter also matches the name of the custom kernel specified when copying the bzImage:
 ```bash
@@ -128,7 +128,7 @@ fallback_image="/boot/initramfs-linux-zen-fallback.img"
 ```
 Finally, generate the initramfs images for the custom kernel in the same way as for an official kernel:
 ```bash
-# mkinitcpio -p linux-zen
+sudo mkinitcpio -p linux-zen
 ```
 Manual Method:
 Now generate an initramfs image and save it to /boot directory with the following command:

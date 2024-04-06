@@ -18,7 +18,7 @@ uname -r
 ```
 Now run the following command to perform a system update with pacman:
 ```bash
-sudo pacman -S cpio bc rsync
+yay -S cpio bc rsync gtk2 glib2 libglade
 ```
 Compiling Kernel from Source:
 
@@ -54,7 +54,7 @@ zcat /proc/config.gz > .config
 ```
 Now run the following command to prepare the configuration file for the new version of kernel.
 ```bash
-make menuconfig
+make gconfig
 ```
 It should start the following terminal based graphical interface. You can press arrow keys to navigate and `Enter` and `ESC` to select or go back one step respectively.
 

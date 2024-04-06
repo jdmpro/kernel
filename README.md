@@ -56,19 +56,19 @@ Now run the following command to prepare the configuration file for the new vers
 ```bash
 make gconfig
 ```
-It should start the following terminal based graphical interface. You can press arrow keys to navigate and `Enter` and `ESC` to select or go back one step respectively.
+It should start the following terminal based graphical interface.
 
 From here you can enable or disable specific kernel features. If you don’t know what it is, just leave the defaults.
 
-Once you’re satisfied with the configuration file, go to `Save` option and press `Enter`
+Once you’re satisfied with the configuration file, go to `Save` option
 
-Go to `Exit` and press `Enter`
+Go to `Exit`
 
 You should be back to the terminal.
 
 Now run the following command to start the compilation process:
 ```bash
-make -j6
+make -j24
 ```
 The kernel compilation process should start.
 
@@ -76,31 +76,38 @@ It should take a long time for the kernel compilation process to finish.
 
 Now install all the compiled kernel headers with the following command:
 ```bash
+sudo make headers
+```
+```bash
 sudo make headers_install
 ```
 All the kernel headers should be installed.
 
 Now install all the compiled kernel modules with the following command:
 ```bash
+sudo make modules
+```
+```bash
 sudo make modules_install
 ```
 All the kernel modules should be installed.
+
+Now copy the vmlinuz file for your architecture to the /boot directory. For 32-bit operating system, run the following command:
+For 32-bit operating system, run the following command:
+```bash
+sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
+```
+For 64-bit operating system, run the following command:
+```bash
+sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
+```
+The file should be copied.
 
 Now install all the compiled nvidia-dkms with the following command:
 ```bash
 yay -S nvidia-dkms
 ```
 Nvidia-dkms should be installed.
-
-Now copy the vmlinuz file for your architecture to the /boot directory. For 32-bit operating system, run the following command:
-```bash
-sudo cp -v arch/x86/boot/bzImage /boot/vmlinuz-linux-6.9.0-rc2
-```
-For 64-bit operating system, run the following command:
-```bash
-sudo cp -v arch/x86_64/boot/bzImage /boot/vmlinuz-6.9.0-rc2
-```
-The file should be copied.
 
 Now generate an initramfs image and save it to /boot directory with the following command:
 ```bash

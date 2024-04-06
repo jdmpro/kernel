@@ -24,7 +24,7 @@ Compiling Kernel from Source:
 
 You can also download and compile an updated version of kernel from the official website of Linux kernel at `https://www.kernel.org`
 
-The latest version of Linux kernel as of the time of writing is `6.9.0-rc2`. Find latest kernel copy link use `wget` command.
+The latest version of Linux kernel as of the time of writing is `linux-zen`. Find latest kernel copy link use `wget` command.
 ```bash
 wget https://git.kernel.org/torvalds/t/linux-zen.tar.gz
 ```
@@ -48,7 +48,7 @@ Now navigate to the directory with the following command:
 ```bash
 cd linux-zen
 ```
-Now copy the configuration file that the current kernel is using to the `linux-6.9-rc2` directory with the following command:
+Now copy the configuration file that the current kernel is using to the `linux-zen` directory with the following command:
 ```bash
 zcat /proc/config.gz > .config
 ```
@@ -143,11 +143,11 @@ Then create a symlink from `/boot/System.map` to point to `/boot/System.map-linu
 
 Now copy the System.map file to /boot directory with the following command:
 ```bash
-sudo cp -v System.map /boot/System.map-6.9.0-rc2
+sudo cp -v System.map /boot/System.map-linux-zen
 ```
 Now make a symbolic link of the System.map-6.9.0-rc2 file to /boot/System.map with the following command:
 ```bash
-sudo ln -sf /boot/System.map-6.9.0-rc2 /boot/System.map
+sudo ln -sf /boot/System.map-linux-zen /boot/System.map
 ```
 Now generate a grub.cfg file with the following command:
 ```bash
@@ -174,11 +174,11 @@ That’s how you upgrade the kernel of Arch Linux. Thanks for reading this artic
 
 Uninstall instructions removing other kernels.
 ```bash
-sudo rm -rf /lib/modules/6.9.0-rc2 <your_kernel>
+sudo rm -rf /lib/modules/linux-zen <your_kernel>
 ```
-Just be aware my other commands are for my kernel, which happens to be named `"6.9.0-rc2"`. Just change the name in the command to the name you gave to your kernel.
+Just be aware my other commands are for my kernel, which happens to be named `"linux-zen"`. Just change the name in the command to the name you gave to your kernel.
 ```bash
-sudo rm /boot/vmlinuz-6.9.0-rc2 /boot/initramfs-6.9.0-rc2.img
+sudo rm /boot/vmlinuz-linux-zen /boot/initramfs-linux-zen.img
 ```
 then update grub
 ```bash

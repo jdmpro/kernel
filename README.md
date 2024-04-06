@@ -32,21 +32,21 @@ The Linux kernel archive file should start downloading.
 
 Once the download is complete, navigate to the directory where you downloaded the file. In my case it is the Downloads/ directory in my USER’s home directory.
 
-I listed the directory contents with ls command and as you can see, `linux-zen.tar.gz` file is there.
+I listed the directory contents with ls command and as you can see, `v6.8.4-zen1.tar.gz` file is there.
 
 Now extract the archive file with the following command:
 ```bash
-tar xvf linux-zen.tar.gz
+tar xvf v6.8.4-zen1.tar.gz
 ```
 The file should be extracted.
 
 NOTE: To compile a Linux kernel, you need more than `20GB` of free space. You can check how much space you have left with `df -h` command.
 
-Once the file is extracted, a new directory should be created. In my case it is `linux-zen` directory.
+Once the file is extracted, a new directory should be created. In my case it is`zen-kernel-6.8.4-zen1`directory.
 
 Now navigate to the directory with the following command:
 ```bash
-cd linux-zen
+cd zen-kernel-6.8.4-zen1
 ```
 Now copy the configuration file that the current kernel is using to the `linux-zen` directory with the following command:
 ```bash
